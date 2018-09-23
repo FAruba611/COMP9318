@@ -1,0 +1,345 @@
+\documentclass[a4paper,12pt]{article}
+
+%\setlength{\parskip}{\baselineskip} % Spacing between paragraphs%
+%\setlength{\parindent}{0pt} % Don't indent new paragraphs
+%\everypar{\noindent\hangafter=1\hangindent=2em\relax% this to be debugged
+
+\usepackage{multirow}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+% \usepackage{amssymb}  %$\because$ $\therefore$
+\tikzset{
+	treenode/.style = {align=center, inner sep=0pt, text centered,  font=\small},
+	explored/.style = {treenode, circle, black, draw=black,  text width=1.2em},
+	hid/.style = {treenode, circle, lightgray, dashed},
+	pruned/.style = {treenode, circle, lightgray, dashed, draw=black, font=\sffamily\bfseries, text width=1.2em},
+	expr/.style = {treenode, draw=black},
+	dead/.style = {treenode, draw=black}
+}
+
+
+% Floating picture next to each other
+\usepackage{listings}
+\usepackage{floatrow}
+\usepackage{subfig}
+\floatsetup[figure]{style=plain,subcapbesideposition=center}
+
+\usepackage{standalone}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+% package for pseudocode format and algorithm
+%\usepackage[english]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{algorithm}
+
+\usepackage[noend]{algpseudocode}
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+\usepackage{graphicx}
+\usepackage{natbib}
+
+% the overall setting of pages
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=20mm,
+ right=20mm,
+ top=25mm,
+ bottom=20mm,
+ }
+
+
+% Title etc...
+\title{COMP9318: Assignment 1}
+\author{Changfeng Li (z5137858)\\
+\date{12/05/2018}\\
+\ UNSW\\
+\ School of Computer Science and Engineering\\[-0.3ex]
+\ Sydney, Australia\\
+}
+
+
+
+\begin{document}
+\maketitle
+
+
+%------------------------------------------------------------%
+\newpage
+
+% ---- Q1(Q)
+\section*{Question 1}
+
+% ---- Q1(sol)
+\subsection*{1.1}
+\setlength{\parindent}{0pt} % Don't indent new paragraphs
+
+Based on the alogrithm implemented in lab2, we can calculate all of the tuples below.
+
+\begin{tabular}{llllr}
+% \toprule
+{} &   Location &  Time &      Item &  Quantity \\
+% \midrule
+00 &  Melbourne &  2005 &  XBox 360 &    1700 \\
+01 &  Melbourne &  2005 &       ALL &    1700 \\
+02 &  Melbourne &   ALL &  XBox 360 &    1700 \\
+03 &  Melbourne &   ALL &       ALL &    1700 \\
+04 &     Sydney &  2005 &       PS2 &    1400 \\
+05 &     Sydney &  2005 &       ALL &    1400 \\
+06 &     Sydney &  2006 &       PS2 &    1500 \\
+07 &     Sydney &  2006 &       Wii &     500 \\
+08 &     Sydney &  2006 &       ALL &    2000 \\
+09 &     Sydney &   ALL &       PS2 &    2900 \\
+10 &     Sydney &   ALL &       Wii &     500 \\
+11 &     Sydney &   ALL &       ALL &    3400 \\
+12 &        ALL &  2005 &       PS2 &    1400 \\
+13 &        ALL &  2005 &  XBox 360 &    1700 \\
+14 &        ALL &  2005 &       ALL &    3100 \\
+15 &        ALL &  2006 &       PS2 &    1500 \\
+16 &        ALL &  2006 &       Wii &     500 \\
+17 &        ALL &  2006 &       ALL &    2000 \\
+18 &        ALL &   ALL &       PS2 &    2900 \\
+19 &        ALL &   ALL &       Wii &     500 \\
+20 &        ALL &   ALL &  XBox 360 &    1700 \\
+21 &        ALL &   ALL &       ALL &    5100 \\
+% \bottomrule
+\end{tabular}
+
+\subsection*{1.2}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=80mm]{Q1_2_schema.png}
+\caption{q1\_2\_schema \label{overflow}}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=120mm]{Q1_2_insert.png}
+\caption{Q1\_2\_insert \label{overflow}}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=105mm]{Q1_2_compute.png}
+\caption{Q1\_2\_compute \label{overflow}}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=102mm]{q1_2_result.png}
+\caption{Q1\_2\_result \label{overflow}}
+\end{figure}
+
+end
+
+\newpage
+\subsection*{1.3}
+\begin{tabular}{llllr}
+%\toprule
+{} & Location &  Time & Item &  Quantity \\
+%\midrule
+00  &   Sydney &  2006 &  ALL &    2000.0 \\
+01  &   Sydney &  ALL  &  PS2 &    2900.0 \\
+02  &   Sydney &  ALL  &  ALL &    3400.0 \\
+03  &      ALL &  2005 &  ALL &    3100.0 \\
+04  &      ALL &  2006 &  ALL &    2000.0 \\
+05  &      ALL &  ALL  &  PS2 &    2900.0 \\
+06  &      ALL &  ALL  &  ALL &    5100.0 \\
+%\bottomrule
+\end{tabular}
+
+
+
+\subsection*{1.4}
+
+The criterion for selecting the parameters is the best when the offsets just do not overlap, Actually, because of the structure and integrity of data, we might always waste a little space, but that's not matter.
+
+We choose the function as 
+$$ f(Location, Time, Item) = (Location * 3 + Time) * 4 + Item $$
+In column "Location", we denote Sydney as 1, Mselbourne as 2, ALL as 0.
+In column "Time", we denote 2005 as 1, 2006 as 2, ALL as 0.
+In column "Item", we denote PS2 as 1, XBox 360 as 2, Wii as 3, ALL as 0.
+
+Thus, we transfer the table into
+
+\begin{tabular}{lllllrllr}
+{} & Location & Time & Item & Quality & Offset & \  & Quality & Offset \\
+%\midrule
+00 &   2      &  0   &  0   &  1700   &  24    & \  &  1700   &  24  \\
+01 &   1      &  2   &  1   &  1500   &  21    & \  &  1500   &  21  \\ 
+02 &   1      &  1   &  1   &  1400   &  17    & \  &  1400   &  17  \\
+03 &   2      &  0   &  2   &  1700   &  26    & \  &  1700   &  26  \\
+04 &   0      &  2   &  1   &  1500   &  9     & \  &  1500   &  9   \\
+05 &   2      &  1   &  0   &  1700   &  28    & \  &  1700   &  28  \\
+06 &   1      &  0   &  0   &  3400   &  12    & \  &  3400   &  12  \\
+07 &   0      &  1   &  1   &  1400   &  5     & \  &  1400   &  5   \\
+08 &   2      &  1   &  2   &  1700   &  30    & \  &  1700   &  30  \\
+09 &   0      &  2   &  3   &  500    &  11    & \  &  500    &  11  \\
+10 &   1      &  0   &  3   &  500    &  15    & => &  500    &  15  \\
+11 &   1      &  1   &  0   &  1400   &  16    & \  &  1400   &  16  \\
+12 &   0      &  1   &  0   &  3100   &  4     & \  &  3100   &  4   \\
+13 &   1      &  2   &  0   &  2000   &  20    & \  &  2000   &  20  \\
+14 &   0      &  0   &  1   &  2900   &  1     & \  &  2900   &  1   \\
+15 &   0      &  1   &  2   &  1700   &  6     & \  &  1700   &  6   \\
+16 &   0      &  0   &  0   &  5100   &  0     & \  &  5100   &  0   \\
+17 &   0      &  0   &  3   &  500    &  3     & \  &  500    &  3   \\
+18 &   1      &  2   &  3   &  500    &  23    & \  &  500    &  23  \\
+19 &   1      &  0   &  1   &  2900   &  13    & \  &  2900   &  13  \\
+20 &   0      &  2   &  0   &  2000   &  8     & \  &  2000   &  8   \\
+21 &   0      &  0   &  2   &  1700   &  2     & \  &  1700   &  2   \\
+%\midrule
+
+\end{tabular}
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------%
+\newpage
+
+\section*{Question 2}
+\subsection*{2.1}
+When $P(y=1|x) \geq P(y=0|x)$, the prediction of classfier is of label 1
+that's
+$$\frac{P(y=1|x)}{P(y=0|x)} \geq 1$$
+Based on Conditional Probability formula, we conduct
+$$\frac{P(x|y=1))P(y=1)}{P(x|y=0)P(y=0)} \geq 1$$
+Based on Naive Bayesian formula, we get
+$$P(x|y) =  \prod\limits_{j=0}^d P(x_j|y)$$
+$$\frac{P(y=1)}{P(y=0)} \cdot \prod\limits_{j=0}^d \frac{P(x_j|y=1)}{P(x_j|y=0)} \geq 1$$
+we denote $P(y=1)$ as $P_{y}$,
+$P(x_j=1|y=1)$ as $P_{j1}$,$P(x_j=0|y=1)$ as $1 - P_{j1}$,
+$P(x_j=1|y=0)$ as $P_{j0}$,$P(x_j=0|y=0)$ as $1 - P_{j0}$
+=>
+$$P(x_j|y=1) = P_{j1}^{x_j} \cdot (1 - P_{j1})^{1-x_j}$$
+$$P(x_j|y=0) = P_{j0}^{x_j} \cdot (1 - P_{j0})^{1-x_j}$$
+we get 
+$$\frac{P_j} {1-P_j} \cdot \prod\limits_{j=0}^d 
+\frac{ { P_{j1} } ^ {x_j}  \cdot { {(1-P_{j1})} ^ {(1-x_j)} } }
+     { { P_{j0} } ^ {x_j}  \cdot { {(1-P_{j0})} ^ {(1-x_j)} } }
+     \geq 1
+$$
+apply $log$ calculation on both sides of the formula, and based on the rule that $log(mn) = logm + logn$
+we induct that
+$$log\frac{P_j} {1-P_j} + log \prod\limits_{j=0}^d 
+\frac{ { P_{j1} } ^ {x_j}  \cdot { {(1-P_{j1})} ^ {(1-x_j)} } }
+     { { P_{j0} } ^ {x_j}  \cdot { {(1-P_{j0})} ^ {(1-x_j)} } }
+     \geq 0
+$$
+then based on the hint provided
+$$log\frac{P_j} {1-P_j} + \sum\limits_{j=0}^d log
+\frac{ { P_{j1} } ^ {x_j}  \cdot { {(1-P_{j1})} ^ {(1-x_j)} } }
+     { { P_{j0} } ^ {x_j}  \cdot { {(1-P_{j0})} ^ {(1-x_j)} } }
+     \geq 0
+$$
+=>
+$$log\frac{P_j} {1-P_j} 
++ 
+\sum\limits_{j=0}^d (log
+{(\frac{ { P_{j1} } }
+{ { P_{j0} } } )} ^ {x_j} 
++ 
+log
+{(\frac{ { 1 - P_{j1} } }
+{ { 1- P_{j0} } } )} ^ {1 - x_j} )
+     \geq 0
+$$
+=>
+$$log\frac{P_j} {1-P_j} 
++ 
+\sum\limits_{j=0}^d (
+x_j log {(\frac{ { P_{j1} } }
+{ { P_{j0} } } )} 
++ 
+{(1 - x_j) log}{(\frac{ { 1 - P_{j1} } }
+{ { 1- P_{j0} } } )} )
+     \geq 0
+$$
+=>
+$$log\frac{P_j} {1-P_j} 
++ 
+\sum\limits_{j=0}^d 
+(x_j log {(\frac{ { P_{j1} } }
+{ { P_{j0} } } )} - 
+{ x_j log (\frac{ { 1 - P_{j1} } }
+{ { 1- P_{j0} } } )} + log \frac{1-P_{j1}}{1-P_{j0}})
+     \geq 0
+$$
+=>
+$$log\frac{P_j} {1-P_j} 
++ log \prod\limits_{j=0}^d  \frac{1-P_{j1}}{1-P_{j0}} 
++ 
+\sum\limits_{j=0}^d 
+x_j log {(\frac{  P_{j1} (1 - P_{j0})  }
+{  P_{j0} (1-P_{j1}) } }   
+     \geq 0
+$$
+
+we can equal $m = log (\frac{P_j} {1-P_j} \prod\limits_{j=0}^d  \frac{1-P_{j1}}{1-P_{j0}} ) $,
+$\omega_j = log {(\frac{  P_{j1} (1 - P_{j0})  }
+{  P_{j0} (1-P_{j1}) } }  $
+
+that is 
+$m + \sum\limits_{j=0}^d \omega_j x_j \geq 0$
+Obviously, it is a linear classfier.
+
+On the other side, it is easy to prove when classfier classify to label 0, it is the same result.
+
+
+\subsection*{2.2}
+The required quantities of training dataset is not the same, Logistic regression search data in linear mode, so it requires $O(n)$, while Naive Bayes model depend strictly on independence law and statistical method, which only needs $O(logn)$. Thus, Naive Bayes and logistic regression cover on their gradual accuracies with different rates. Logistic Regression is better than Naive Bayes when more training examples are available, but Naive Bayes is a better choice than Logistic Regression when amount of training data is not enough.
+
+%------------------------------------------------------------%
+\newpage
+
+\section*{Question 3}
+\subsection*{3.1}
+
+According to the formula of likelihood function of logistic regression, we get\\
+$$pf(w) = \sum\limits_{i=0}^n ( y_i log(P(x_i)) + (1 - y_i)log(1-p(x_i)) ) $$
+We set the natural logarithm(its logarithm to the base of the mathematical constant e), which means we use $ln$ instead of $log$. We get
+$$pfe(w) = \sum\limits_{i=0}^n ( y_i ln(P(x_i)) + (1 - y_i)ln(1-p(x_i)) ) $$
+=>
+$$pfe(w) = \sum\limits_{i=0}^n ( y_i ln(\frac{P(x_i)}{1-p(x_i)}) + ln(1-p(x_i)) ) $$
+Based on formula of sigmoid function and the condition 
+$$P[y = 1 | x] = \sigma(w^T x)$$
+$$ P(x) = \sigma(w^T x) = \frac{e^{w^T x}}{1 + e^{w^T x}}$$
+We conduct by substituting and simplifying
+$$pfe(w) = \sum\limits_{i=0}^n (y_i w^T x_i - ln(1 + e^{w^T x_i}))$$
+Because loss function is the negative log likelihood, so we can conclude that
+$$loss(w) = \sum\limits_{i=0}^n (- y_i w^T x_i + ln(1 + e^{w^T x_i})) $$
+
+\subsection*{3.2}
+Based on the condition
+$$P[y = 1 | x] = f(w^T x)$$
+Samely We conduct
+$$pfe(w) = \sum\limits_{i=0}^n (y_i ln\frac{f(w^T x_i)}{1 - f(w^T x_i)} + ln(1 - f(w^T x_i))) $$
+Because loss function is the negative log likelihood, so we can conclude that
+$$loss(w) = \sum\limits_{i=0}^n (- y_i ln\frac{f(w^T x_i)}{1 - f(w^T x_i)} - ln(1 - f(w^T x_i))) $$
+
+
+
+
+
+
+
+
+
+%------------------------------------------------------------%
+
+
+\end{document}
